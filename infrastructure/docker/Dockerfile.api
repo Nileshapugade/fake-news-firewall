@@ -1,0 +1,8 @@
+FROM python:3.9-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY api/ ./api
+COPY ml/models/roberta-fake-news/ ./ml/models/roberta-fake-news
+EXPOSE 8000
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8080"]
